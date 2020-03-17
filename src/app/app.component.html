@@ -1,0 +1,131 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Womens </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Mens </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Children </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Footwear</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Accessories <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Outlet</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Designer</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Comunity</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container container-style">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="select-container">
+        <label class="label-styles" for="firstSelect">Chose Option</label>
+        <select class="form-control" id="firstSelect">
+          <option>First Option</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="labels-container">
+        <label class="label-first" for="firstSelect">Lable</label>
+        <label class="label-second" for="firstSelect">Another label</label>
+      </div>
+      <div class="image-container">
+        <img src="assets/images/Untitled-1.png" class="img-fluid" alt="Responsive image">
+      </div>
+      <div class="movies-list">
+        <table class="table table-hover">
+          <tbody>
+            <tr *ngFor="let mov of moviesArray" [ngClass]="{'active-movie': mov.id == 1}">
+              <td>{{mov.title}}</td>
+              <th style="float: right;">{{mov.releaseYear}}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="select-container">
+        <label class="label-styles" for="secondSelect">Chose Another Option</label>
+        <select class="form-control" id="secondSelect">
+          <option>Some Other Option</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+        <table class="table table-calc">
+          <thead class="thead-custom">
+            <tr>
+              <th>A</th>
+              <th>B</th>
+              <th>C</th>
+            </tr>
+          </thead>
+          <tbody class="tbody-custom">
+            <tr>
+              <td><input type="number" step="0.1" class="form-control input-dimensions" [(ngModel)]="aCellValue" (keyup)="calcCbox();"></td>
+              <td><input type="number" step="0.1" class="form-control input-dimensions"[(ngModel)]="bCellValue" (keyup)="calcCbox();"></td>
+              <td><span class="results" *ngIf="cResult">C = {{cResult}}</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-calc-secondary">
+          <thead class="thead-custom">
+            <tr>
+              <th>D</th>
+              <th>E</th>
+              <th>F</th>
+            </tr>
+          </thead>
+          <tbody class="tbody-custom">
+            <tr>
+              <td><input type="number" step="0.1" class="form-control input-dimensions" [(ngModel)]="dCellValue" (keyup)="calcFbox();"></td>
+              <td><input type="number" step="0.1" class="form-control input-dimensions" [(ngModel)]="eCellValue" (keyup)="calcFbox();"></td>
+              <td><span *ngIf="fResult">F = {{fResult}}</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-calc-secondary">
+          <thead class="thead-custom">
+            <tr>
+              <th>G</th>
+              <th>H</th>
+              <th>I</th>
+            </tr>
+          </thead>
+          <tbody class="tbody-custom">
+            <tr>
+              <td><span *ngIf="adbeMax">G = {{adbeMax}}</span></td>
+              <td><span *ngIf="adbeMin">H = {{adbeMin}}</span></td>
+              <td><span *ngIf="cfghAvg">I = {{cfghAvg}}</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="image-container">
+          <img src="assets/images/Secondary-Image.png" class="img-fluid" alt="Responsive image">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -23,4 +23,5 @@ export class ApiService {
     //headers = headers.append("Content-Type", "application/x-www-form-urlencoded");
     return this.httpClient.get('https://reactnative.dev/movies.json',{headers: headers});
   }
+
 }

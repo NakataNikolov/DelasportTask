@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from './api.service';
+import $ from 'jquery';
+
 
 @Component({
   selector: 'app-root',
@@ -24,7 +26,10 @@ export class AppComponent {
   }
   //load movies list on page load
   ngOnInit() {
-    this.getMovies();
+    //this.getMovies(); <- This is my prefered method of calling API's 
+    this.ajaxRequest(); //call Ajax request
+    this.passDataFromAjax(); // Call and pass returned data to UI 
+  
   }
   //retrive movie list from API 
   getMovies(){
@@ -34,6 +39,25 @@ export class AppComponent {
       this.moviesArray = rawData.movies;
     })
   }
+  //Assign data from Ajax request  
+  passDataFromAjax(){
+    this.moviesArray = this.ajaxRequest();
+  }
+  //ajax request to the API 
+  ajaxRequest(){
+    var movies = '';
+    $.ajax({
+      async: false,
+      url: "https://reactnative.dev/movies.json",
+      type: 'GET',
+      dataType: 'json',
+      success: function(res) {
+        movies = res.movies;
+      }
+    });
+    return movies
+  }
+
   // used for calculating values from A & B cells
   calcCbox(){
     if(this.aCellValue && this.bCellValue){ // check if A & B cells have values and if they have we are calculating the final result

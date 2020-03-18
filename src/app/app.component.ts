@@ -22,39 +22,46 @@ export class AppComponent {
     private apiService: ApiService,
   ) { 
   }
+  //load movies list on page load
   ngOnInit() {
     this.getMovies();
   }
-  //retrive all products from db 
+  //retrive movie list from API 
   getMovies(){
     var rawData;
     this.apiService.getMovies().subscribe((data)=>{
       rawData = data;
       this.moviesArray = rawData.movies;
-      console.log(this.moviesArray);
     })
   }
+  // used for calculating values from A & B cells
   calcCbox(){
-    if(this.aCellValue && this.bCellValue){
+    if(this.aCellValue && this.bCellValue){ // check if A & B cells have values and if they have we are calculating the final result
       this.cResult = this.aCellValue + this.bCellValue; 
-      this.grandCalc();
+      this.grandCalc();// Calc values from A,B,D,E  cells and displaying the results in G,H,I
     }
   }
+   // used for calculating values from D & E cells
   calcFbox(){
     if(this.dCellValue && this.eCellValue){
       this.fResult = this.dCellValue * this.eCellValue;
       this.grandCalc();
     }
   }
+  // Calculating values from A,B,D,E  cells and displaying the results in G,H,I
   grandCalc(){
     var cellValuesArray = new Array();
     var sumCells = 0;
-    if(this.aCellValue && this.bCellValue && this.dCellValue && this.eCellValue){
-      cellValuesArray.push(this.aCellValue, this.bCellValue, this.dCellValue, this.eCellValue);
-      this.adbeMax = Math.max(... cellValuesArray);
-      this.adbeMin = Math.min(... cellValuesArray);
-      sumCells += cellValuesArray.reduce(function(a, b) { return a + b; }, 0);;
-      this.cfghAvg = (sumCells) / cellValuesArray.length;
+    // check if we have values in A,B,D,E cells and if we have we display the results in G,H,I
+    // G is displaying the following formula  -> Max value from [A,B,D,E]
+    // H is displaying the following formula  -> Min value from [A,B,D,E]
+    // I is displaying the following formula  -> Average value from [C,F,G,H]
+    if(this.aCellValue && this.bCellValue && this.dCellValue && this.eCellValue){ 
+      cellValuesArray.push(this.aCellValue, this.bCellValue, this.dCellValue, this.eCellValue); //pushing all cell values to array 
+      this.adbeMax = Math.max(... cellValuesArray); //Get max value from array
+      this.adbeMin = Math.min(... cellValuesArray); //Get min values from array 
+      sumCells += (this.fResult + this.cResult + this.adbeMax + this.adbeMin); // Make the sum of pointed cells
+      this.cfghAvg = (sumCells) / 4; // calc the average values of pointed cells
     }
   }
 }
